@@ -3,8 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs'
 import connectDB from "@/lib/connectDB";
 import UserModel from "@/model/User";
-import { match } from "assert";
-
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -47,5 +45,32 @@ export const authOptions: NextAuthOptions = {
                 }
             }
         })
-    ]
+    ],
+    pages: {
+        signIn: '/sign-in'
+    },
+    session: {
+        strategy: 'jwt'
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+            if(user){
+                token._id = user._id?.toString();
+                token.isVerified = user.isVerified;
+                token.username = user.username;
+                token.isMessageAccpet = user.isMessageAccpet
+            }
+            return token
+        },
+        async session({ session, user, token }) {
+            if(token){
+                session.user._id = token._id,
+                session.user.isVerified = token.isVerified,
+                session.user.username = token.username,
+                session.user.isMessageAccpet = token.isMessageAccpet
+            }
+            return session
+        },
+    },
+    secret: process.env.NEXTAUTH_SECRET
 }
