@@ -21,8 +21,8 @@ export interface User extends Document {
     username: string;
     email: string;
     password: string;
-    token: string;
-    tokenExpiry: Date;
+    verificationCode: string;
+    verificationCodeExpiry: Date;
     isVarified: boolean;
     isMessageAccpet: boolean;
     createdAt: Date;
@@ -46,11 +46,11 @@ const UserSchema: Schema<User> = new Schema({
         type: String,
         required: true
     },
-    token: {
+    verificationCode: {
         type: String,
         required: [true, 'Code is required'],
     },
-    tokenExpiry: {
+    verificationCodeExpiry: {
        type: Date,
        required: true
     },
@@ -69,4 +69,6 @@ const UserSchema: Schema<User> = new Schema({
     messages: [MesseageSchema]
 })
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('User', UserSchema)
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('User', UserSchema);
+
+export default UserModel;
