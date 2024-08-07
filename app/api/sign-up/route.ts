@@ -2,8 +2,6 @@ import connectDB from "@/lib/connectDB";
 import bcrypt from 'bcryptjs'
 import { verificationEmailSend } from "@/helper/verificationCodeSend";
 import UserModel from "@/model/User";
-import { create } from "domain";
-import { date } from "zod";
 
 export async function POST(request: Request) {
     await connectDB();
@@ -12,6 +10,7 @@ export async function POST(request: Request) {
         const { username, email, password } = await request.json();
 
         if (!username || !email || !password) {
+
             return Response.json({
                 success: false,
                 message: 'All fields are required'
