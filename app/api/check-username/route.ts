@@ -17,7 +17,7 @@ export async function GET(request: Request) {
            }
 
            const result = usernameQuerySchema.safeParse(queryParam);
-           console.log(result, 'result from check username');
+           console.log(result, 'result from check username')
 
            if(!result.success){
              const userNameErrors = result.error.format().username?._errors || [];
@@ -41,7 +41,8 @@ export async function GET(request: Request) {
             }else{
                 return Response.json({
                     success: true,
-                    message: 'Username is available'
+                    message: 'Username is available',
+                    
                 })
             }
            }
