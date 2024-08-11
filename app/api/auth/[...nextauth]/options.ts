@@ -8,17 +8,16 @@ export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             id: 'credentials',
-            name: 'credentials',
+            name: 'Credentials',
             credentials: {
                 email: { label: "Email", type: "text", placeholder: "email@gmail.com" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials: any): Promise<any> {
+
                 await connectDB();
                 try {
-                    // const user = await UserModel.findOne({
-                    //     email: credentials?.email, isVarified: true;
-                    // });
+        
                     const findUser = await UserModel.findOne({
                         $or: [
                             { email: credentials.identifier },

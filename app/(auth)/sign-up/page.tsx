@@ -8,11 +8,9 @@ import { useDebounceCallback, useDebounceValue } from 'usehooks-ts'
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { signUpSchema } from "@/schemas/signUpSchema";
-import Email from "next-auth/providers/email";
 import axios, { AxiosError } from 'axios'
 import { ApiResponse } from "@/types/ApiResponse";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { on } from "events";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from 'lucide-react';
