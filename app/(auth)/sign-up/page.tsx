@@ -24,7 +24,7 @@ const SignUp = () => {
     const [usernameMsg, setUsernameMsg] = useState('');
     const [isCheckingUsername, setIsCheckingUsername] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const debounced = useDebounceCallback(setUsername, 300)
+    const debounced = useDebounceCallback(setUsername, 200)
 
     const { toast } = useToast();
     const router = useRouter();
@@ -46,7 +46,7 @@ const SignUp = () => {
 
                 try {
                     const result = await axios.get(`/api/check-username?username=${username}`)
-                    setUsername(result.data.username);
+                    console.log(result.data)
                     setUsernameMsg(result.data.message);
                 } catch (error) {
                     const axiosError = error as AxiosError<ApiResponse>;
@@ -62,7 +62,7 @@ const SignUp = () => {
 
     }, [username])
 
-    
+console.log(username)    
     const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
         setIsSubmitting(true);
         try {
@@ -111,13 +111,12 @@ const SignUp = () => {
                                         <Input placeholder="username" {...field}
                                             onChange={(e) => {
                                                 field.onChange(e);
-                                                debounced(e.target.value);
+                                                setUsername(e.target.value);
                                             }} />
 
                                     </FormControl>
                                     {isCheckingUsername && <Loader className="animate-spin" />}
                                     <p className={`text-sm ${usernameMsg === 'Username is available' ? 'text-green-500' : 'text-red-500'} `}>{usernameMsg}</p>
-
                                     <FormMessage />
                                 </FormItem>
                             )}

@@ -35,7 +35,7 @@ const VerifyUser = () => {
                 variant: 'default'
             });
 
-            router.replace('sign-in');
+            router.replace('/sign-in');
         } catch (error) {
             console.error(error, 'Verify failed');
             const axiosError = error as AxiosError<ApiResponse>;
@@ -51,8 +51,8 @@ const VerifyUser = () => {
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="max-w-md w-full bg-white p-6 rounded-md shadow-md">
                 <div className="mb-4">
-                    <h1 className="text-2xl font-bold">Sign Up</h1>
-                    <p className="text-gray-500">Create your account</p>
+                    <h1 className="text-2xl font-bold">Complete your verification</h1>
+                    <p className="text-gray-500">Enter the code sent to your email</p>
                 </div>
                 <div>
                     

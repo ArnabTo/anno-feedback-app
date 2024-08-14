@@ -8,13 +8,12 @@ export async function POST(request: Request) {
         const {username, code} = await request.json();
 
       const decodedUsername = decodeURIComponent(username); //optional
-
-      const user = await UserModel.findOne({
-        username: decodedUsername, isVarified: false});
+    
+      const user = await UserModel.findOne({ username: decodedUsername, isVarified: false});
         if(!user) {
             return Response.json({
                 success: false,
-                message: 'User not found'
+                message: 'User not foundsdsdfs'
             }, {
                 status: 404
             });
@@ -33,6 +32,7 @@ export async function POST(request: Request) {
             }, {
                 status: 200
             });
+
         }else if(!isCodeNotExpired) {
             return Response.json({
                 success: false,
