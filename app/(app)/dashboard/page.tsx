@@ -111,29 +111,29 @@ const Dashboard = () => {
             description: 'Copied to clipboard',
         })
     }
-     if(!session || !session.user) return <div>Please Login</div>
+    if (!session || !session.user) return <div>Please Login</div>
 
 
     return (
-        <div className='max-w-6xl mx-10 lg:mx-auto'>
-            <div>
-                <h1 className="text-3xl font-bold underline">Dashboard</h1>
+  
+            <div className='max-w-6xl lg:mx-auto'>
+                <h1 className="text-4xl text-green-500 text-start font-bold py-4">Wellcome to your Dashboard</h1>
                 <div className="flex flex-col gap-3 mt-5">
                     <div>
-                        <h2 className="text-2xl font-bold">Profile</h2>
+                        <h2 className="text-2xl font-bold bg-zinc-200 p-2 rounded-md">Profile</h2>
                         <div className="flex flex-col gap-3 mt-5">
                             <div className='flex items-center gap-4'>
-                                <p className="text-lg font-bold">Username:</p>
+                                <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Username:</p>
                                 <p className="text-lg">{username || 'Username'}</p>
                             </div>
                             <div className='flex items-center gap-2'>
-                                <p className="text-lg font-bold">Profile URL:</p>
+                                <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Profile URL:</p>
                                 <p className="text-lg bg-blue-200 rounded-md px-2 py-1">{profileUrl}</p>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold">Messages</h2>
+                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Messages</h2>
                         <div className="flex flex-col gap-3 mt-5">
                             <div>
                                 <div className="flex flex-col gap-3 mt-5">
@@ -157,7 +157,7 @@ const Dashboard = () => {
 
                 <div className="flex flex-col gap-3 mt-5">
                     <div>
-                        <h2 className="text-2xl font-bold">Settings</h2>
+                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Settings</h2>
                         <div className="flex flex-col gap-3 mt-5">
                             <div>
                                 <p className="text-lg font-bold">Accept Messages</p>
@@ -175,7 +175,7 @@ const Dashboard = () => {
 
                 <div className="flex flex-col gap-3 mt-5">
                     <div>
-                        <h2 className="text-2xl font-bold">Actions</h2>
+                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Actions</h2>
                         <div className="flex flex-col gap-3 mt-5">
                             <div>
                                 <p className="text-lg font-bold">Copy Profile URL</p>
@@ -188,7 +188,6 @@ const Dashboard = () => {
                 </div>
 
             </div>
-        </div>
     );
 };
 

@@ -7,7 +7,7 @@ import Navbar from "@/components/navbar/Navbar";
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"] });
-const bebas_neue = Inter({ subsets: ["latin"], weight: ["100","200","300","400","500","600","700","800","900"] });
+const bebas_neue = Bebas_Neue({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
