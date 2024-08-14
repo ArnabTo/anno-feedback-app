@@ -115,7 +115,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className='max-w-6xl mx-10'>
+        <div className='max-w-6xl mx-10 lg:mx-auto'>
             <div>
                 <h1 className="text-3xl font-bold underline">Dashboard</h1>
                 <div className="flex flex-col gap-3 mt-5">
