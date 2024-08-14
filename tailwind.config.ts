@@ -67,10 +67,18 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "movez": {
+          "0%": { transform: "translate(50%, 0) rotate(0deg)" },
+          "25%": { transform: "translate(100%, 50%) rotate(90deg)" },
+          "50%": { transform: "translate(50%, 100%) rotate(180deg)" },
+          "75%": { transform: "translate(0, 50%) rotate(270deg)" },
+          "100%": { transform: "translate(50%, 0) rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "movez" : "movez 5s linear infinite",
       },
     },
   },

@@ -10,8 +10,8 @@ const Navbar = () => {
 
     const user: User = session?.user;
     return (
-        <nav>
-            <div className="flex items-center justify-between mx-10 my-5">
+        <nav className=" shadow-md py-5">
+            <div className="flex items-center justify-between mx-10">
                 <a className="text-zinc-900 text-3xl font-extrabold" href="#">AnnoChat</a>
                 {
                     session ? (
