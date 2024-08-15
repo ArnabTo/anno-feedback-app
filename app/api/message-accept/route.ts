@@ -9,7 +9,6 @@ export async function POST(request: Request) {
     await connectDB();
 
     const session = await getServerSession(authOptions);
-    console.log(session);
 
     const user: User = session?.user;
 
@@ -24,6 +23,7 @@ export async function POST(request: Request) {
 
     const userID = user._id;
     const { acceptMessages } = await request.json();
+    console.log(acceptMessages)
 
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(userID,

@@ -24,7 +24,7 @@ export default function RootLayout({
       <AuthProvider>
         <body className={bebas_neue.className}>
           {children}
-          {/* <Toaster/> */}
+          <Toaster/>
           </body>
       </AuthProvider>
     </html>

@@ -81,7 +81,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (!session || !session.user) return
-        fetchMessages();
+        // fetchMessages();
         fetchAcceptMessage();
     }, [session, setValue, fetchAcceptMessage, fetchMessages])
 
