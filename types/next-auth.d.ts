@@ -4,7 +4,7 @@ declare module 'next-auth' {
     interface User{
         _id?: string,
         username?: string,
-        isVerified?: boolean,
+        isVerified: boolean,
         isMessageAccpet?: boolean,
     }
     interface Session{
@@ -21,7 +21,7 @@ declare module 'next-auth' {
     interface JWT{
         _id?: string,
         username?: string,
-        isVerified?: boolean,
+        isVerified: boolean,
         isMessageAccpet?: boolean,
     }
 }

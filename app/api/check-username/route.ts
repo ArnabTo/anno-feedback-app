@@ -30,7 +30,7 @@ export async function GET(request: Request) {
     } else {
       const { username } = result.data;
  
-      const user = await UserModel.findOne({ username, isVarified: true });
+      const user = await UserModel.findOne({ username, isVerified: true });
       if (user) {
         return Response.json({
           success: false,

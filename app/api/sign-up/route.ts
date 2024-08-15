@@ -19,7 +19,7 @@ export async function POST(request: Request) {
             })
         }
 
-        const userExistWithUsername = await UserModel.findOne({ username, isVarified: true });
+        const userExistWithUsername = await UserModel.findOne({ username, isVerified: true });
 
         if (userExistWithUsername) {
             return Response.json({
@@ -28,11 +28,11 @@ export async function POST(request: Request) {
             })
         }
 
-        const isUserExist = await UserModel.findOne({ email, isVarified: true });
+        const isUserExist = await UserModel.findOne({ email, isVerified: true });
         const varificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
         if (isUserExist) {
-            if (isUserExist.isVarified) {
+            if (isUserExist.isVerified) {
                 return Response.json({
                     success: false,
                     message: 'User already exist'
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
                 password: hashedPassword,
                 verificationCode: varificationCode,
                 verificationCodeExpiry: expiryDate,
-                isVarified: false,
+                isVerified: false,
                 isMessageAccpet: true,
                 messages: []
             })

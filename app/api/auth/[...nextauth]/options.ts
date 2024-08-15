@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
                     if (!findUser) {
                         throw new Error("Invalid credentials")
                     }
-                    if (!findUser.isVarified) {
+                    if (!findUser.isVerified) {
                         throw new Error("Please verify your email")
                     }
 

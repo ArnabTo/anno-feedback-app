@@ -9,8 +9,9 @@ export async function POST(request: Request) {
 
       const decodedUsername = decodeURIComponent(username); //optional
     
-      const user = await UserModel.findOne({ username: decodedUsername, isVarified: false});
-        if(!user) {
+      const user = await UserModel.findOne({ username: decodedUsername, isVerified: false});
+        
+      if(!user) {
             return Response.json({
                 success: false,
                 message: 'User not foundsdsdfs'
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
         const isCodeNotExpired = new Date(user.verificationCodeExpiry) > new Date();
 
         if(isCodeValid || isCodeNotExpired) {
-            user.isVarified = true;
+            user.isVerified = true;
             await user.save();
             
             return Response.json({
