@@ -8,6 +8,7 @@ import { MessageAcceptSchema } from '@/schemas/acceptMessageSchmea';
 import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
+import { CloudHail } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { tree } from 'next/dist/build/templates/app-page';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -100,7 +101,7 @@ const Dashboard = () => {
         }
     }
 
-    const { username } = session?.user as User || 'User'
+    const username = session?.user?.name || 'User'
     const baseUrl = `${window.location.protocol}//${window.location.host}`
     const profileUrl = `${baseUrl}/u/${username}`
 
