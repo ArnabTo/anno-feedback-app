@@ -13,7 +13,7 @@ const Navbar = () => {
         <nav className="shadow-md py-5">
             <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mx-10">
-                <a className="text-zinc-900 text-3xl font-extrabold" href="#">AnnoChat</a>
+                <a className="text-zinc-900 text-3xl font-extrabold" href="#">AnnoFeed</a>
                 {
                     session ? (
                         <div className="flex justify-center items-center gap-5">
