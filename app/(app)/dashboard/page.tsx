@@ -8,9 +8,7 @@ import { MessageAcceptSchema } from '@/schemas/acceptMessageSchmea';
 import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
-import { CloudHail } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { tree } from 'next/dist/build/templates/app-page';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -18,8 +16,8 @@ const Dashboard = () => {
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
-    const [isAcceptMessage, setIsAcceptMessage] = useState(false);
     const [isSwitchLoading, setIsSwitchLoading] = useState(false);
+    const [profileUrl, setProfileUrl] = useState<string | null>(null);
 
     const { toast } = useToast();
 
@@ -102,17 +100,32 @@ const Dashboard = () => {
             })
         }
     }
+    const username = session?.user?.name || 'User';
+    useEffect(() => {
+        // This code will only run on the client-side
+        if (typeof window !== 'undefined') {
+          const baseUrl = `${window.location.protocol}//${window.location.host}`;
+          setProfileUrl(`${baseUrl}/u/${username}`);
+        }
+      }, [session, username]);
 
-    const username = session?.user?.name || 'User'
-    const baseUrl = `${window.location.protocol}//${window.location.host}`
-    const profileUrl = `${baseUrl}/u/${username}`
+    // const username = session?.user?.name || 'User'
+    // const baseUrl = `${window.location.protocol}//${window.location.host}`
+    // const profileUrl = `${baseUrl}/u/${username}`
 
     const copyToClipBoard = () => {
-        navigator.clipboard.writeText(profileUrl);
-        toast({
-            title: 'Success',
-            description: 'Copied to clipboard',
-        })
+        // navigator.clipboard.writeText(profileUrl);
+        // toast({
+        //     title: 'Success',
+        //     description: 'Copied to clipboard',
+        // })
+        if (profileUrl) {
+            navigator.clipboard.writeText(profileUrl);
+            toast({
+              title: 'Success',
+              description: 'Copied to clipboard',
+            });
+          }
     }
 
     if(status !== 'authenticated') return <div>Please Login</div>
@@ -121,7 +134,6 @@ const Dashboard = () => {
 
 
     return (
-  
             <div className='max-w-6xl lg:mx-auto'>
                 <h1 className="text-4xl text-green-500 text-start font-bold py-4">Wellcome to your Dashboard</h1>
                 <div className="flex flex-col gap-3 mt-5">
@@ -186,7 +198,7 @@ const Dashboard = () => {
                             <div>
                                 <p className="text-lg font-bold">Copy Profile URL</p>
                                 <div className="flex flex-row gap-3 mt-5">
-                                    <Button onClick={copyToClipBoard}>Copy</Button>
+                                    {/* <Button onClick={copyToClipBoard}>Copy</Button> */}
                                 </div>
                             </div>
                         </div>

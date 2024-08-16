@@ -3,6 +3,8 @@ import connectDB from '@/lib/connectDB';
 import UserModel from '@/model/User';
 import { userNameValidation } from '@/schemas/signUpSchema';
 
+export const dynamic = 'force-dynamic';
+
 const usernameQuerySchema = z.object({
   username: userNameValidation,
 })
