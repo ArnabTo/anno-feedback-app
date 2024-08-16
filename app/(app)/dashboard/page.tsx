@@ -137,7 +137,7 @@ const Dashboard = () => {
                         <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Messages</h2>
                         <div className="flex flex-col gap-3 mt-5">
                             <div>
-                                <div className="flex flex-col gap-3 mt-5">
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-5">
                                     {
                                         messages.length > 0 ? (
                                             messages.map((msg, index) => (

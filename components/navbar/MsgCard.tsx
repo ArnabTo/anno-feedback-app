@@ -26,10 +26,10 @@ const MsgCard = ({ message, onMessageDelete}: MessageCardProp) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Card Title</CardTitle>
+                <CardTitle>Anonymous user</CardTitle>
             </CardHeader>
             <CardContent>
-                <p>Card Content</p>
+                <p>{message.content}</p>
             </CardContent>
             <AlertDialog>
                 <AlertDialogTrigger asChild>
