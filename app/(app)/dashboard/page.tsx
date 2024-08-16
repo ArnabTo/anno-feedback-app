@@ -27,7 +27,7 @@ const Dashboard = () => {
         setMessages(messages.filter((msg) => msg._id !== messageId));
     }
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
 
     const form = useForm({
         resolver: zodResolver(MessageAcceptSchema),
@@ -84,7 +84,9 @@ const Dashboard = () => {
         if (!session || !session.user) return
         fetchMessages();
         fetchAcceptMessage();
-    }, [session, setValue, fetchAcceptMessage, fetchMessages])
+        console.log(status)
+    }, [session, setValue, fetchAcceptMessage, fetchMessages, status])
+
 
     const handleSwitch = async () => {
         try {
@@ -112,6 +114,9 @@ const Dashboard = () => {
             description: 'Copied to clipboard',
         })
     }
+
+    if(status !== 'authenticated') return <div>Please Login</div>
+
     if (!session || !session.user) return <div>Please Login</div>
 
 

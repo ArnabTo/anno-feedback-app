@@ -17,11 +17,9 @@ export async function GET(request: Request) {
     }
 
     const result = usernameQuerySchema.safeParse(queryParam);
-    console.log(result, 'result from check username')
 
     if (!result.success) {
       const userNameErrors = result.error.format().username?._errors || [];
-      console.log(userNameErrors, 'userNameErrors');
       return Response.json({
         success: false,
         message: 'Invalid username',

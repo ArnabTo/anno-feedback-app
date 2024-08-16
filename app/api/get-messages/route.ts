@@ -35,8 +35,6 @@ export async function GET(request: Request) {
             }
         ]);
 
-        console.log(user); // Debugging output
-
         if (!user || user.length === 0) {
             return new Response(JSON.stringify({
                 success: false,
@@ -53,8 +51,7 @@ export async function GET(request: Request) {
             status: 200
         });
     } catch (error) {
-        console.log(error);
-        return new Response(JSON.stringify({
+          return new Response(JSON.stringify({
             success: false,
             message: 'Internal server error'
         }), {

@@ -1,10 +1,10 @@
 'use client';
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { toast, useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -44,13 +44,20 @@ const SignIn = () => {
                     variant: 'default'
                 })
             }
-
-            if(result?.url){
-                  router.replace('/dashboard')
+            if (result?.url) {
+                setTimeout(() => {
+                    router.replace("/dashboard");
+                }, 2000); 
             }
+            
 
         } catch (error) {
-            
+           console.log(error)
+           toast({
+               title: 'Login failed',
+               description: 'Something went worng',
+               variant: 'destructive'
+           })
         }
     }
     return (
