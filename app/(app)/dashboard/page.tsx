@@ -91,7 +91,20 @@ const Dashboard = () => {
             const result = axios.post('/api/message-accept', {
                 acceptMessages: !acceptMessages
             })
-            setValue('acceptMessages', !acceptMessages)
+            setValue('acceptMessages', !acceptMessages);
+
+            if (acceptMessages) {
+                toast({
+                    title: 'Messages Disabled',
+                    description: 'You’ve stopped accepting new messages. No further feedback will be collected.',
+                    variant: 'destructive'
+                })
+            } else {
+                toast({
+                    title: 'Messages Enabled',
+                    description: 'You’re now accepting new anonymous messages. Feedback will appear on your dashboard.',
+                })
+            }
         } catch (error) {
             toast({
                 title: 'Error',
@@ -104,108 +117,112 @@ const Dashboard = () => {
     useEffect(() => {
         // This code will only run on the client-side
         if (typeof window !== 'undefined') {
-          const baseUrl = `${window.location.protocol}//${window.location.host}`;
-          setProfileUrl(`${baseUrl}/u/${username}`);
+            const baseUrl = `${window.location.protocol}//${window.location.host}`;
+            setProfileUrl(`${baseUrl}/u/${username}`);
         }
-      }, [session, username]);
+    }, [session, username]);
 
-    // const username = session?.user?.name || 'User'
-    // const baseUrl = `${window.location.protocol}//${window.location.host}`
-    // const profileUrl = `${baseUrl}/u/${username}`
 
     const copyToClipBoard = () => {
-        // navigator.clipboard.writeText(profileUrl);
-        // toast({
-        //     title: 'Success',
-        //     description: 'Copied to clipboard',
-        // })
         if (profileUrl) {
             navigator.clipboard.writeText(profileUrl);
             toast({
-              title: 'Success',
-              description: 'Copied to clipboard',
+                title: 'Success',
+                description: 'Copied to clipboard',
             });
-          }
+        }
     }
 
-    if(status !== 'authenticated') return <div>Please Login</div>
+    if (status !== 'authenticated') return <div>Please Login</div>
 
     if (!session || !session.user) return <div>Please Login</div>
 
 
     return (
-            <div className='max-w-6xl lg:mx-auto'>
-                <h1 className="text-4xl text-green-500 text-start font-bold py-4">Wellcome to your Dashboard</h1>
-                <div className="flex flex-col gap-3 mt-5">
-                    <div>
-                        <h2 className="text-2xl font-bold bg-zinc-200 p-2 rounded-md">Profile</h2>
-                        <div className="flex flex-col gap-3 mt-5">
-                            <div className='flex items-center gap-4'>
-                                <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Username:</p>
-                                <p className="text-lg">{username || 'Username'}</p>
-                            </div>
-                            <div className='flex items-center gap-2'>
-                                <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Profile URL:</p>
-                                <p className="text-lg bg-blue-200 rounded-md px-2 py-1">{profileUrl}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Messages</h2>
-                        <div className="flex flex-col gap-3 mt-5">
-                            <div>
-                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-5">
-                                    {
-                                        messages.length > 0 ? (
-                                            messages.map((msg, index) => (
-                                                <MsgCard
-                                                    key={index}
-                                                    message={msg}
-                                                    onMessageDelete={handleDeleteMessage}
-                                                />
-                                            ))
-                                        ) : (<p className="text-lg font-bold">Messages</p>)
-                                    }
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-3 mt-5">
-                    <div>
-                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Settings</h2>
-                        <div className="flex flex-col gap-3 mt-5">
-                            <div>
-                                <p className="text-lg font-bold">Accept Messages</p>
-                                <div className="flex flex-row gap-3 mt-5">
-                                    <Switch {...register('acceptMessages')}
-                                        checked={acceptMessages}
-                                        onCheckedChange={handleSwitch}
-                                        disabled={isSwitchLoading}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-3 mt-5">
-                    <div>
-                        <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Actions</h2>
-                        <div className="flex flex-col gap-3 mt-5">
-                            <div>
-                                <p className="text-lg font-bold">Copy Profile URL</p>
-                                <div className="flex flex-row gap-3 mt-5">
-                                    {/* <Button onClick={copyToClipBoard}>Copy</Button> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+        <div className='max-w-6xl mx-10 lg:mx-auto my-10'>
+            <div>
+                <h1 className="text-4xl text-purple-600 text-start md:text-center font-bold">Welcome to Your Anno Feedback Dashboard</h1>
+                <p className='text-lg md:text-center'>Share your unique link to collect anonymous thoughts and feedback from others.</p>
             </div>
+            <div className="flex flex-col gap-3 mt-5">
+                <div>
+                    
+                </div>
+                <div>
+                    <h2 className="text-2xl font-bold bg-zinc-200 p-2 rounded-md">Profile</h2>
+                    <div className="flex flex-col gap-3 mt-5">
+                        <div className='flex items-center gap-4'>
+                            <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Username:</p>
+                            <p className="text-lg">{username || 'Username'}</p>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Profile URL:</p>
+                            <p className="text-lg bg-blue-200 rounded-md px-2 py-1">{profileUrl}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='flex flex-col md:flex-row gap-10'>
+                    <div className="flex flex-col gap-3 mt-5">
+                        <div>
+                            <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Actions</h2>
+                            <div className="flex flex-col gap-3 mt-5">
+                                <div>
+                                    <p className="text-lg font-bold">Copy Profile URL</p>
+                                    <div className="flex flex-row gap-3 mt-5">
+                                        <Button onClick={copyToClipBoard} >Copy</Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-3 mt-5">
+                        <div>
+                            <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Settings</h2>
+                            <div className="flex flex-col gap-3 mt-5">
+                                <div>
+                                    <p className="text-lg font-bold">Accept Messages</p>
+                                    <div className="flex flex-row gap-3 mt-5">
+                                        <Switch {...register('acceptMessages')}
+                                            checked={acceptMessages}
+                                            onCheckedChange={handleSwitch}
+                                            disabled={isSwitchLoading}
+                                        />
+                                        <p>{acceptMessages ? 'On' : 'Off'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Messages</h2>
+                    <div className="flex flex-col gap-3 mt-5">
+                        <div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
+                                {
+                                    messages.length > 0 ? (
+                                        messages.map((msg, index) => (
+                                            <MsgCard
+                                                key={index}
+                                                message={msg}
+                                                onMessageDelete={handleDeleteMessage}
+                                            />
+                                        ))
+                                    ) : (<p className="text-lg font-bold">Messages</p>)
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     );
 };
 
