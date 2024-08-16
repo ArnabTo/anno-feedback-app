@@ -3,15 +3,11 @@ import { signIn, signOut, useSession } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { useEffect, useState } from "react";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import axios, { AxiosError } from 'axios'
-import { ApiResponse } from "@/types/ApiResponse";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader } from 'lucide-react';
 import Link from "next/link";
 import { signInSchema } from "@/schemas/signInSchema";
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Inter } from "next/font/google";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,7 +7,7 @@ import Navbar from "@/components/navbar/Navbar";
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"] });
-const bebas_neue = Bebas_Neue({ subsets: ["latin"], weight: ["400"] });
+const pippins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={bebas_neue.className}>
+        <body className={pippins.className}>
           {children}
           <Toaster/>
           </body>
