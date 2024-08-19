@@ -1,9 +1,5 @@
 import connectDB from "@/lib/connectDB";
-import { getServerSession } from "next-auth";
 import UserModel from "@/model/User";
-import { User } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/options";
-import mongoose from "mongoose";
 import { Message } from "@/model/User";
 
 export async function POST(request: Request) {

@@ -64,8 +64,8 @@ const SignIn = () => {
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="max-w-md w-full bg-white p-6 rounded-md shadow-md">
             <div className="mb-4">
-                <h1 className="text-2xl font-bold">Sign In</h1>
-                <p className="text-gray-500">Please sign in to continue.</p>
+                <h1 className="text-xl lg:text-4xl font-extrabold mb-2">Sign In</h1>
+                <p className="text-gray-500 text-lg">Please sign in to continue.</p>
             </div>
 
             <Form {...form}>
