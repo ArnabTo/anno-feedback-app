@@ -16,7 +16,7 @@ const MsgCard = ({ message, onMessageDelete}: MessageCardProp) => {
 
     const handleDelete = async () =>{
        const result = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
-    
+        
        toast({
         title: result.data.message
        })
@@ -32,20 +32,20 @@ const MsgCard = ({ message, onMessageDelete}: MessageCardProp) => {
                 <p>{message.content}</p>
             </CardContent>
             <AlertDialog>
-                <AlertDialogTrigger asChild>
-                    <Button variant="outline">Show Dialog</Button>
+                <AlertDialogTrigger className="m-5" asChild>
+                    <Button variant="outline">Delete</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete your
-                            account and remove your data from our servers.
+                            This action cannot be undone. This will permanently delete this message
+                            and remove this data from our servers.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+                        <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

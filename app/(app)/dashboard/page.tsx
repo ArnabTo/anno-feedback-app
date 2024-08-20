@@ -133,7 +133,7 @@ const Dashboard = () => {
         }
     }
 
-    if (status !== 'authenticated') return <div>Please Login</div>
+    if (status !== 'authenticated') return <div className='text-center text-5xl font-extrabold flex items-center'>Please Login</div>
 
     if (!session || !session.user) return (<div className='text-center text-5xl font-extrabold flex items-center'>Please Login</div>)
 
