@@ -166,25 +166,22 @@ const Dashboard = () => {
     return (
         <div className='max-w-6xl mx-10 lg:mx-auto my-10'>
             <div>
-                <h1 className="text-4xl text-purple-600 text-start md:text-center font-bold">Welcome to Your Anno Feedback Dashboard</h1>
+                <h1 className="text-4xl text-purple-600 text-start md:text-center font-extrabold">Welcome to Your Anno Feedback Dashboard</h1>
                 <p className='text-lg md:text-center'>Share your unique link to collect anonymous thoughts and feedback from others.</p>
             </div>
             <div className="flex flex-col gap-3 mt-5">
                 <div>
-
-                </div>
-                <div>
                     <div className="flex flex-col gap-5 mt-5 mb-10">
                         <div>
-                            <p className="text-lg font-bold">Copy Profile URL</p>
+                            <p className="text-2xl font-bold">Copy Profile URL</p>
                             <p>Copy the the link and share it with others</p>
-                            <div className='flex items-center gap-2 mt-3'>
+                            <div className='flex flex-col md:flex-row items-center gap-2 mt-3'>
                                 <p className="w-full text-lg bg-purple-100 rounded-md px-2 py-1">{profileUrl}</p>
                                 <Button onClick={copyToClipBoard} >Copy</Button>
                             </div>
                         </div>
                         <div>
-                            <p className="text-lg font-bold">Accept Messages</p>
+                            <p className="text-2xl font-bold">Accept Messages</p>
                             <p>Toggle the switch to enable or disable new messages</p>
                             <div className="flex flex-row gap-3 mt-3">
                                 <Switch {...register('acceptMessages')}
