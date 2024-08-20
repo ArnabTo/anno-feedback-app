@@ -8,6 +8,7 @@ import { MessageAcceptSchema } from '@/schemas/acceptMessageSchmea';
 import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
+import { RefreshCcw } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -78,6 +79,30 @@ const Dashboard = () => {
         }
     }, [toast])
 
+    const refeshMessages = async() => {
+        fetchMessages(true);
+        setLoading(true);
+        setIsSwitchLoading(false);
+
+        try {
+            const result = await axios.get<ApiResponse>('/api/get-messages');
+            setMessages(result.data.messages || []);
+
+            toast({
+                title: 'Refreshed',
+                description: 'Messages are refreshed'
+            })
+           
+        } catch (error) {
+            toast({
+                title: 'Error',
+                description: 'Something went wrong',
+                variant: 'destructive'
+            })
+        } finally {
+            setLoading(false);
+        }
+    }
     useEffect(() => {
         if (!session || !session.user) return
         fetchMessages();
@@ -133,9 +158,9 @@ const Dashboard = () => {
         }
     }
 
-    if (status !== 'authenticated') return <div className='text-center text-5xl font-extrabold flex items-center'>Please Login</div>
+    if (status !== 'authenticated') return <div className='text-center text-5xl font-extrabold flex justify-center items-center mt-60'>Please Login</div>
 
-    if (!session || !session.user) return (<div className='text-center text-5xl font-extrabold flex items-center'>Please Login</div>)
+    if (!session || !session.user) return (<div className='text-center text-5xl font-extrabold flex justify-center items-center mt-60'>Please Login</div>)
 
 
     return (
@@ -174,22 +199,25 @@ const Dashboard = () => {
                 </div>
 
                 <div>
-                    <h2 className="text-2xl font-bold">Messages</h2>
+                    <div className='mb-10'>
+                        <h2 className="text-2xl font-bold">Messages</h2>
+                        <Button onClick={refeshMessages}><RefreshCcw className=' animate-spin repeat-1 ' /></Button>
+                    </div>
                     <div className="flex flex-col gap-3 mt-3">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {
-                                    messages.length > 0 ? (
-                                        messages.map((msg, index) => (
-                                            <MsgCard
-                                                key={index}
-                                                message={msg}
-                                                onMessageDelete={handleDeleteMessage}
-                                            />
-                                        ))
-                                    ) : (<p className="text-lg">No messages is available</p>)
-                                }
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {
+                                messages.length > 0 ? (
+                                    messages.map((msg, index) => (
+                                        <MsgCard
+                                            key={index}
+                                            message={msg}
+                                            onMessageDelete={handleDeleteMessage}
+                                        />
+                                    ))
+                                ) : (<p className="text-lg">No messages is available</p>)
+                            }
 
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
