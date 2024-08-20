@@ -73,7 +73,8 @@ const SignUp = () => {
                     variant: 'default'
                 })
             }
-            router.replace(`/verify/${username}`);
+            // router.replace(`/verify/${username}`);
+            router.replace('/dashboard');
             setIsSubmitting(false);
         } catch (error) {
             console.error(error, 'Error on signup');

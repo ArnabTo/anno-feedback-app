@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { verificationEmailSend } from "@/helper/verificationCodeSend";
 import { sendVerificationCode } from "@/helper/sendVerificationCode";
 import UserModel from "@/model/User";
+import { toast } from "@/components/ui/use-toast";
 
 export async function POST(request: Request) {
     await connectDB();
@@ -56,25 +57,29 @@ export async function POST(request: Request) {
                 password: hashedPassword,
                 verificationCode: varificationCode,
                 verificationCodeExpiry: expiryDate,
-                isVerified: false,
+                isVerified: true,
                 isMessageAccpet: true,
                 messages: []
             })
             await createUser.save();
 
-            const emailResponse = await verificationEmailSend(email, username, varificationCode);
-            console.log(emailResponse)
-            if (!emailResponse.success) {
-                return Response.json({
-                    success: false,
-                    message: 'Error while sending verification email'
-                }, { status: 500 })
-            } else {
-                return Response.json({
-                    success: true,
-                    message: 'User registered successfully'
-                }, { status: 200 })
-            }
+           return Response.json({
+               success: true,
+               message: 'User registered successfully'
+           })
+            // const emailResponse = await verificationEmailSend(email, username, varificationCode);
+            // console.log(emailResponse)
+            // if (!emailResponse.success) {
+            //     return Response.json({
+            //         success: false,
+            //         message: 'Error while sending verification email'
+            //     }, { status: 500 })
+            // } else {
+            //     return Response.json({
+            //         success: true,
+            //         message: 'User registered successfully'
+            //     }, { status: 200 })
+            // }
         }
 
 
