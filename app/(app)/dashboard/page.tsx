@@ -135,7 +135,7 @@ const Dashboard = () => {
 
     if (status !== 'authenticated') return <div>Please Login</div>
 
-    if (!session || !session.user) return <div>Please Login</div>
+    if (!session || !session.user) return (<div className='text-center text-5xl font-extrabold flex items-center'>Please Login</div>)
 
 
     return (
@@ -146,64 +146,37 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col gap-3 mt-5">
                 <div>
-                    
+
                 </div>
                 <div>
-                    <h2 className="text-2xl font-bold bg-zinc-200 p-2 rounded-md">Profile</h2>
-                    <div className="flex flex-col gap-3 mt-5">
-                        <div className='flex items-center gap-4'>
-                            <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Username:</p>
-                            <p className="text-lg">{username || 'Username'}</p>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <p className="text-lg font-bold bg-zinc-200 rounded-md p-2">Profile URL:</p>
-                            <p className="text-lg bg-blue-200 rounded-md px-2 py-1">{profileUrl}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='flex flex-col md:flex-row gap-10'>
-                    <div className="flex flex-col gap-3 mt-5">
+                    <div className="flex flex-col gap-5 mt-5 mb-10">
                         <div>
-                            <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Actions</h2>
-                            <div className="flex flex-col gap-3 mt-5">
-                                <div>
-                                    <p className="text-lg font-bold">Copy Profile URL</p>
-                                    <div className="flex flex-row gap-3 mt-5">
-                                        <Button onClick={copyToClipBoard} >Copy</Button>
-                                    </div>
-                                </div>
+                            <p className="text-lg font-bold">Copy Profile URL</p>
+                            <p>Copy the the link and share it with others</p>
+                            <div className='flex items-center gap-2 mt-3'>
+                                <p className="w-full text-lg bg-purple-100 rounded-md px-2 py-1">{profileUrl}</p>
+                                <Button onClick={copyToClipBoard} >Copy</Button>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="flex flex-col gap-3 mt-5">
                         <div>
-                            <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Settings</h2>
-                            <div className="flex flex-col gap-3 mt-5">
-                                <div>
-                                    <p className="text-lg font-bold">Accept Messages</p>
-                                    <div className="flex flex-row gap-3 mt-5">
-                                        <Switch {...register('acceptMessages')}
-                                            checked={acceptMessages}
-                                            onCheckedChange={handleSwitch}
-                                            disabled={isSwitchLoading}
-                                        />
-                                        <p>{acceptMessages ? 'On' : 'Off'}</p>
-                                    </div>
-                                </div>
+                            <p className="text-lg font-bold">Accept Messages</p>
+                            <p>Toggle the switch to enable or disable new messages</p>
+                            <div className="flex flex-row gap-3 mt-3">
+                                <Switch {...register('acceptMessages')}
+                                    checked={acceptMessages}
+                                    onCheckedChange={handleSwitch}
+                                    disabled={isSwitchLoading}
+                                />
+                                <p>{acceptMessages ? 'On' : 'Off'}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-
                 <div>
-                    <h2 className="text-2xl font-bold bg-zinc-200 rounded-md p-2">Messages</h2>
-                    <div className="flex flex-col gap-3 mt-5">
-                        <div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
+                    <h2 className="text-2xl font-bold">Messages</h2>
+                    <div className="flex flex-col gap-3 mt-3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                                 {
                                     messages.length > 0 ? (
                                         messages.map((msg, index) => (
@@ -213,11 +186,10 @@ const Dashboard = () => {
                                                 onMessageDelete={handleDeleteMessage}
                                             />
                                         ))
-                                    ) : (<p className="text-lg font-bold">Messages</p>)
+                                    ) : (<p className="text-lg">No messages is available</p>)
                                 }
 
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
